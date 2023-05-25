@@ -1,0 +1,62 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background: #d0e3f3;
+    /* position: relative; */
+}
+
+.wrapper {
+    /* position: relative; */
+    margin: 50px auto;
+    padding: 50px;
+    width: 1080px;
+
+    background: #ffffff;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.04);
+    border-radius: 20px;
+}
+.wrapper hr {
+    border: 1px solid #eaeaea;
+}
+.container {
+    width: 980px;
+}
+
+section h1 {
+    font-size: 32px;
+}
+.sneakers__wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.sneakers {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.search {
+    display: flex;
+    align-items: center;
+    border: 1px solid #f3f3f3;
+    border-radius: 10px;
+    padding: 10px;
+}
+.search img {
+    margin-right: 15px;
+}
+.search input {
+    border: none;
+}
+.Allcard__wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+
