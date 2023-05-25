@@ -14,6 +14,7 @@ const Header = () => {
                     <p>Магазин лучших кроссовок</p>
                 </div>
             </div>
+            <h1>qq</h1>
             <ul className={cl.headerRight}>
                 <li>
                     <img src={shop} alt="" />
