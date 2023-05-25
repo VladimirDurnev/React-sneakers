@@ -25,7 +25,7 @@ const Cart = () => {
                         </div>
 						
                     </div>
-                    <h1>22</h1>
+
                     <ul className={cl.cartFullPriceWrapper}>
                         <li className={cl.cartFullPrice}>
                             <p>Итого: </p>
