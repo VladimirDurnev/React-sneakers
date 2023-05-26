@@ -10,6 +10,7 @@ import Card from './components/Card';
 function App() {
     const [sneakers, setSneakers] = useState();
     const [itemCart, setItemCart] = useState([]);
+    const [itemFavorite, setItemFavorite] = useState([]);
     const [openCart, setOpenCart] = useState(false);
     const [response, setResponse] = useState(false);
     const [searchValue, setSearchValue] = useState('');
@@ -52,6 +53,8 @@ function App() {
                                     title={item.title}
                                     price={item.price}
                                     urlImg={item.urlImg}
+                                    itemFavorite={itemFavorite}
+                                    setItemFavorite = {setItemFavorite}
                                     itemCart={itemCart}
                                     setItemCart={setItemCart}
                                 />
