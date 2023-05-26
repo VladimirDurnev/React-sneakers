@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import cl from '../style/Card.module.css';
 
-const Card = ({ title, price, urlImg, itemCart, setItemCart }) => {
+const Card = ({id, title, price, urlImg, itemCart, setItemCart }) => {
     const [addFavorite, setAddFavorite] = useState(false);
     const [addSneakers, setAddSneakers] = useState(false);
-
     const addR = () => {
         setAddSneakers(!addSneakers);
         if (
@@ -15,7 +15,13 @@ const Card = ({ title, price, urlImg, itemCart, setItemCart }) => {
                     item.urlImg === urlImg
             )
         ) {
-            setItemCart((prev) => [...prev, { title, price, urlImg }]);
+            setItemCart((prev) => [...prev, {id, title, price, urlImg }]);
+            axios.post('http://localhost:3000/cart', {
+                id,
+                title,
+                price,
+                urlImg
+            });
         }
     };
 
@@ -24,7 +30,11 @@ const Card = ({ title, price, urlImg, itemCart, setItemCart }) => {
             <div className={cl.card}>
                 <span className={cl.favorite}>
                     <img
-                        src={addFavorite ? '/img/png/favoriteRed.png' : '/img/png/favorite.png'}
+                        src={
+                            addFavorite
+                                ? '/img/png/favoriteRed.png'
+                                : '/img/png/favorite.png'
+                        }
                         alt=""
                         onClick={() => setAddFavorite(!addFavorite)}
                     />
@@ -38,7 +48,11 @@ const Card = ({ title, price, urlImg, itemCart, setItemCart }) => {
                     </div>
 
                     <img
-                        src={addSneakers ? '/img/png/Add.png' : '/img/png/plus.png'}
+                        src={
+                            addSneakers
+                                ? '/img/png/Add.png'
+                                : '/img/png/plus.png'
+                        }
                         alt=""
                         onClick={() => addR()}
                     />

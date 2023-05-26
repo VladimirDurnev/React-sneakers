@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 import cl from './style/App.module.css';
@@ -6,7 +7,6 @@ import Search from './UI/Search';
 import Cart from './components/Cart';
 import Card from './components/Card';
 
-import { useEffect, useState } from 'react';
 function App() {
     const [sneakers, setSneakers] = useState();
     const [itemCart, setItemCart] = useState([]);
@@ -16,14 +16,17 @@ function App() {
 
     useEffect(() => {
         axios
-            .get('https://646f7a0b09ff19b1208754c5.mockapi.io/items')
+            .get('http://localhost:3000/item')
             .then((res) => setSneakers(res.data))
             .then(() => setResponse(true));
+        axios
+            .get('http://localhost:3000/cart')
+            .then((res) => setItemCart(res.data));  
     }, []);
 
     return (
         <div className={cl.wrapper}>
-            {openCart && <Cart setOpenCart={setOpenCart} itemCart={itemCart} />}
+            {openCart && <Cart setOpenCart={setOpenCart} itemCart={itemCart} setItemCart={setItemCart}/>}
             <Header setOpenCart={setOpenCart} />
             <hr />
             <section>
@@ -45,6 +48,7 @@ function App() {
                             .map((item) => (
                                 <Card
                                     key={item.id}
+                                    id={item.id}
                                     title={item.title}
                                     price={item.price}
                                     urlImg={item.urlImg}
