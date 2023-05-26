@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import cl from '../style/Card.module.css';
 
@@ -15,6 +15,23 @@ const Card = ({
     const [addFavorite, setAddFavorite] = useState(false);
     const [favoriteStatus, setFavoriteStatus] = useState(false);
     const [addSneakers, setAddSneakers] = useState(false);
+    
+    useEffect(() => {
+        if (
+            itemFavorite.some(
+                (item) =>
+                    item.id === id &&
+                    item.title === title &&
+                    item.price === price &&
+                    item.urlImg === urlImg
+            )
+        ) {
+            setFavoriteStatus(true)
+        } else{
+            setFavoriteStatus(false)
+        }
+        
+    })
     const addToCart = () => {
         setAddSneakers(!addSneakers);
         if (
@@ -54,12 +71,11 @@ const Card = ({
                 <span className={cl.favorite}>
                     <img
                         src={
-                            addFavorite
+                            favoriteStatus
                                 ? '/img/png/favoriteRed.png'
                                 : '/img/png/favorite.png'
                         }
                         alt=""
-                        // onClick={() => setAddFavorite(!addFavorite)}
                         onClick={() => addToFavorite()}
                     />
                 </span>

@@ -22,12 +22,22 @@ function App() {
             .then(() => setResponse(true));
         axios
             .get('http://localhost:3000/cart')
-            .then((res) => setItemCart(res.data));  
+            .then((res) => setItemCart(res.data));
+        axios
+            .get('http://localhost:3000/favorite')
+            .then((res) => setItemFavorite(res.data));
     }, []);
+
 
     return (
         <div className={cl.wrapper}>
-            {openCart && <Cart setOpenCart={setOpenCart} itemCart={itemCart} setItemCart={setItemCart}/>}
+            {openCart && (
+                <Cart
+                    setOpenCart={setOpenCart}
+                    itemCart={itemCart}
+                    setItemCart={setItemCart}
+                />
+            )}
             <Header setOpenCart={setOpenCart} />
             <hr />
             <section>
@@ -54,7 +64,7 @@ function App() {
                                     price={item.price}
                                     urlImg={item.urlImg}
                                     itemFavorite={itemFavorite}
-                                    setItemFavorite = {setItemFavorite}
+                                    setItemFavorite={setItemFavorite}
                                     itemCart={itemCart}
                                     setItemCart={setItemCart}
                                 />

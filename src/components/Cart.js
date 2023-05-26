@@ -26,7 +26,6 @@ const Cart = ({ setOpenCart, itemCart, setItemCart }) => {
                                     <b>{item.price}</b>
                                 </div>
                                 <button className={cl.close} onClick={() => removeItem(item.id)}>
-                                {/* <button className={cl.close} onClick={() => console.log(item.id)}> */}
                                     <img
                                         src={'/img/png/close.png'}
                                         alt="close"
