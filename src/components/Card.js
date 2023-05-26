@@ -1,8 +1,4 @@
 import React, { useState } from 'react';
-import plus from '../img/plus.png';
-import add from '../img/Add.png';
-import favorite from '../img/favorite.png';
-import favoriteRed from '../img/favoriteRed.png';
 import cl from '../style/Card.module.css';
 
 const Card = ({ title, price, urlImg, itemCart, setItemCart }) => {
@@ -28,7 +24,7 @@ const Card = ({ title, price, urlImg, itemCart, setItemCart }) => {
             <div className={cl.card}>
                 <span className={cl.favorite}>
                     <img
-                        src={addFavorite ? favoriteRed : favorite}
+                        src={addFavorite ? '/img/png/favoriteRed.png' : '/img/png/favorite.png'}
                         alt=""
                         onClick={() => setAddFavorite(!addFavorite)}
                     />
@@ -42,7 +38,7 @@ const Card = ({ title, price, urlImg, itemCart, setItemCart }) => {
                     </div>
 
                     <img
-                        src={addSneakers ? add : plus}
+                        src={addSneakers ? '/img/png/Add.png' : '/img/png/plus.png'}
                         alt=""
                         onClick={() => addR()}
                     />

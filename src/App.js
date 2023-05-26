@@ -1,6 +1,8 @@
+import axios from 'axios';
+
 import cl from './style/App.module.css';
-import search from './img/search.png';
 import Header from './components/Header';
+import Search from './UI/Search';
 import Cart from './components/Cart';
 import Card from './components/Card';
 
@@ -13,9 +15,9 @@ function App() {
     const [searchValue, setSearchValue] = useState('');
 
     useEffect(() => {
-        fetch('https://646f7a0b09ff19b1208754c5.mockapi.io/items')
-            .then((res) => res.json())
-            .then((data) => setSneakers(data))
+        axios
+            .get('https://646f7a0b09ff19b1208754c5.mockapi.io/items')
+            .then((res) => setSneakers(res.data))
             .then(() => setResponse(true));
     }, []);
 
@@ -27,15 +29,10 @@ function App() {
             <section>
                 <div className={cl.sneakers}>
                     <h1>Все кроссовки</h1>
-                    <div className={cl.search}>
-                        <img src={search} alt="search" />
-                        <input
-                            value={searchValue}
-                            type="text"
-                            placeholder="Поиск..."
-                            onChange={(e) => setSearchValue(e.target.value)}
-                        />
-                    </div>
+                    <Search
+                        searchValue={searchValue}
+                        setSearchValue={setSearchValue}
+                    />
                 </div>
                 <div className={cl.Allcard__wrapper}>
                     {response &&

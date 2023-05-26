@@ -1,7 +1,6 @@
 import React from 'react';
 import cl from '../style/Cart.module.css'
-import SNEAKERS from '../img/SNEAKERS.jpg';
-import close from '../img/close.png';
+
 
 const Cart = ({setOpenCart, itemCart}) => {
     return (
@@ -22,7 +21,7 @@ const Cart = ({setOpenCart, itemCart}) => {
                                 <b>{item.price}</b>
                             </div>
                             <button className={cl.close}>
-                                <img src={close} alt="close" />
+                                <img src={'/img/png/close.png'} alt="close" />
                             </button>
                         </div>
                     </div>

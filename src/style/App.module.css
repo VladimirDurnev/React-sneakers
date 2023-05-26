@@ -30,17 +30,13 @@ body {
 section h1 {
     font-size: 32px;
 }
-.sneakers__wrapper {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
+
 .sneakers {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.search {
+/* .search {
     display: flex;
     align-items: center;
     border: 1px solid #f3f3f3;
@@ -52,8 +48,8 @@ section h1 {
 }
 .search input {
     border: none;
-    outline: none
-}
+    outline: none;
+} */
 .Allcard__wrapper {
     display: flex;
     flex-wrap: wrap;
