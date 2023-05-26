@@ -2,29 +2,33 @@ import React from 'react';
 import cl from '../style/Cart.module.css'
 import SNEAKERS from '../img/SNEAKERS.jpg';
 import close from '../img/close.png';
-const Cart = () => {
+
+const Cart = ({setOpenCart, itemCart}) => {
     return (
         <div>
-            <div style={{display: 'none'}} className={cl.overlay}>
-                <div className={cl.cart}>
+            <div className={cl.overlay} onClick={() => setOpenCart()}>
+                <div className={cl.cart} onClick={(e) => e.stopPropagation()}>
                     <h3 className={cl.cartTitle}>Корзина</h3>
-                    <div className={cl.cartItem}>
+                    {itemCart.map(item => 
+                        <div className={cl.cartItem}>
                         <div className={cl.cartContent}>
                             <img
                                 className={cl.cartContentImg}
-                                src={SNEAKERS}
+                                src={item.urlImg}
                                 alt=""
                             />
                             <div className={cl.cartContentPrice}>
-                                <p>Мужские Кроссовки Nike Air Max 270</p>
-                                <b>12 999 руб.</b>
+                                <p>{item.title}</p>
+                                <b>{item.price}</b>
                             </div>
                             <button className={cl.close}>
                                 <img src={close} alt="close" />
                             </button>
                         </div>
-						
                     </div>
+                    
+                    )}
+                    
 
                     <ul className={cl.cartFullPriceWrapper}>
                         <li className={cl.cartFullPrice}>

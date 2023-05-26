@@ -22,11 +22,11 @@
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+    overflow: auto;
 }
 
 .cartItem {
     flex: 1;
-    overflow: auto;
 }
 .cartContent {
     background: #ffffff;

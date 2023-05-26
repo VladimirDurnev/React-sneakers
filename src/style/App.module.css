@@ -52,11 +52,10 @@ section h1 {
 }
 .search input {
     border: none;
+    outline: none
 }
 .Allcard__wrapper {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 }
-
-

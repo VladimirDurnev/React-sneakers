@@ -4,7 +4,7 @@ import shop from '../img/shop.png';
 import love from '../img/love.png';
 import user from '../img/user.png';
 import cl from '../style/Header.module.css'
-const Header = () => {
+const Header = ({setOpenCart}) => {
     return (
         <header className={cl.header}>
             <div className={cl.headerInfoWrapper}>
@@ -14,9 +14,8 @@ const Header = () => {
                     <p>Магазин лучших кроссовок</p>
                 </div>
             </div>
-            <h1>qq</h1>
             <ul className={cl.headerRight}>
-                <li>
+                <li onClick={() => setOpenCart(true)}>
                     <img src={shop} alt="" />
                     <span>1205 руб</span>
                 </li>
