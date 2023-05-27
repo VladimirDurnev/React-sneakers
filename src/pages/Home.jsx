@@ -6,12 +6,36 @@ export default function Home({
     sneakers,
     itemCart,
     itemFavorite,
-    response,
+    loading,
     searchValue,
     setSearchValue,
     setItemFavorite,
     setItemCart,
 }) {
+    const renderItems = () => {
+        return (
+            loading
+                ? [...Array(4)]
+                : sneakers.filter((item) =>
+                      item.title
+                          .toLowerCase()
+                          .includes(searchValue.toLowerCase())
+                  )
+        ).map((item) => (
+            <Card
+                key={item?.id}
+                id={item?.id}
+                title={item?.title}
+                price={item?.price}
+                urlImg={item?.urlImg}
+                itemFavorite={itemFavorite}
+                setItemFavorite={setItemFavorite}
+                itemCart={itemCart}
+                setItemCart={setItemCart}
+                loading={loading}
+            />
+        ));
+    };
     return (
         <>
             <div className={cl.sneakers}>
@@ -21,28 +45,7 @@ export default function Home({
                     setSearchValue={setSearchValue}
                 />
             </div>
-            <div className={cl.Allcard__wrapper}>
-                {response &&
-                    sneakers
-                        .filter((item) =>
-                            item.title
-                                .toLowerCase()
-                                .includes(searchValue.toLowerCase())
-                        )
-                        .map((item) => (
-                            <Card
-                                key={item.id}
-                                id={item.id}
-                                title={item.title}
-                                price={item.price}
-                                urlImg={item.urlImg}
-                                itemFavorite={itemFavorite}
-                                setItemFavorite={setItemFavorite}
-                                itemCart={itemCart}
-                                setItemCart={setItemCart}
-                            />
-                        ))}
-            </div>
+            <div className={cl.Allcard__wrapper}>{renderItems()}</div>
         </>
     );
 }

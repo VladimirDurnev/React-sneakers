@@ -4,7 +4,6 @@ import axios from 'axios';
 
 const Cart = ({ setOpenCart, itemCart, setItemCart }) => {
     const removeItem = (id) => {
-        console.log(id)
         axios.delete(`http://localhost:3000/cart/${id}`)
         setItemCart(prev => prev.filter(item => item.id !== id) )
     }

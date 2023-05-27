@@ -5,30 +5,33 @@ import cl from './style/App.module.css';
 import Header from './components/Header';
 import Cart from './components/Cart';
 
-
 import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Favorite from './pages/Favorite';
 
 function App() {
-    const [sneakers, setSneakers] = useState();
+    const [sneakers, setSneakers] = useState([]);
     const [itemCart, setItemCart] = useState([]);
     const [itemFavorite, setItemFavorite] = useState([]);
     const [openCart, setOpenCart] = useState(false);
-    const [response, setResponse] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [searchValue, setSearchValue] = useState('');
 
+
     useEffect(() => {
-        axios
-            .get('http://localhost:3000/item')
-            .then((res) => setSneakers(res.data))
-            .then(() => setResponse(true));
-        axios
-            .get('http://localhost:3000/cart')
-            .then((res) => setItemCart(res.data));
-        axios
-            .get('http://localhost:3000/favorite')
-            .then((res) => setItemFavorite(res.data));
+        const fetching = async () => {
+            const itemRes = await axios.get('http://localhost:3000/item');
+            const cartRes = await axios.get('http://localhost:3000/cart');
+            const favoriteRes = await axios.get(
+                'http://localhost:3000/favorite'
+            );
+
+            setSneakers(itemRes.data);
+            setItemCart(cartRes.data);
+            setItemFavorite(favoriteRes.data);
+            setLoading(false)
+        };
+        fetching();
     }, []);
 
     return (
@@ -48,11 +51,12 @@ function App() {
                         sneakers={sneakers}
                         itemCart={itemCart}
                         itemFavorite={itemFavorite}
-                        response={response}
                         searchValue={searchValue}
                         setSearchValue={setSearchValue}
                         setItemFavorite={setItemFavorite}
                         setItemCart={setItemCart}
+                        loading={loading}
+      
                     />
                 />
                 <Route
@@ -60,12 +64,10 @@ function App() {
                     element=<Favorite
                         itemCart={itemCart}
                         itemFavorite={itemFavorite}
-                        response={response}
                         searchValue={searchValue}
                         setSearchValue={setSearchValue}
                         setItemFavorite={setItemFavorite}
                         setItemCart={setItemCart}
-                    
                     />
                 />
             </Routes>
