@@ -137,37 +137,6 @@ const Card = ({
                     </div>
                 </div>
             )}
-            {/* <div className={cl.card}>
-                <span className={cl.favorite}>
-                    <img
-                        src={
-                            favoriteStatus
-                                ? '/img/png/favoriteRed.png'
-                                : '/img/png/favorite.png'
-                        }
-                        alt=""
-                        onClick={() => addToFavorite()}
-                    />
-                </span>
-                <img className={cl.sneakers__img} src={urlImg} alt="" />
-                <p>{title}</p>
-                <div className={cl.price__wrapper}>
-                    <div className={cl.price}>
-                        <span>Цена:</span>
-                        <b>{price}</b>
-                    </div>
-
-                    <img
-                        src={
-                            addSneakers
-                                ? '/img/png/Add.png'
-                                : '/img/png/plus.png'
-                        }
-                        alt=""
-                        onClick={() => addToCart()}
-                    />
-                </div>
-            </div> */}
         </>
     );
 };

@@ -9,6 +9,8 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Favorite from './pages/Favorite';
 
+import AppContext from './context';
+
 function App() {
     const [sneakers, setSneakers] = useState([]);
     const [itemCart, setItemCart] = useState([]);
@@ -16,7 +18,6 @@ function App() {
     const [openCart, setOpenCart] = useState(false);
     const [loading, setLoading] = useState(true);
     const [searchValue, setSearchValue] = useState('');
-
 
     useEffect(() => {
         const fetching = async () => {
@@ -29,49 +30,39 @@ function App() {
             setSneakers(itemRes.data);
             setItemCart(cartRes.data);
             setItemFavorite(favoriteRes.data);
-            setLoading(false)
+            setLoading(false);
         };
         fetching();
     }, []);
 
     return (
-        <div className={cl.wrapper}>
-            {openCart && (
-                <Cart
-                    setOpenCart={setOpenCart}
-                    itemCart={itemCart}
-                    setItemCart={setItemCart}
-                />
-            )}
-            <Header setOpenCart={setOpenCart} />
-            <Routes>
-                <Route
-                    path="/"
-                    element=<Home
-                        sneakers={sneakers}
+        <AppContext.Provider
+            value={{
+                sneakers,
+                itemCart,
+                itemFavorite,
+                searchValue,
+                setSearchValue,
+                setItemFavorite,
+                setItemCart,
+                loading,
+            }}
+        >
+            <div className={cl.wrapper}>
+                {openCart && (
+                    <Cart
+                        setOpenCart={setOpenCart}
                         itemCart={itemCart}
-                        itemFavorite={itemFavorite}
-                        searchValue={searchValue}
-                        setSearchValue={setSearchValue}
-                        setItemFavorite={setItemFavorite}
-                        setItemCart={setItemCart}
-                        loading={loading}
-      
-                    />
-                />
-                <Route
-                    path="/Favorite"
-                    element=<Favorite
-                        itemCart={itemCart}
-                        itemFavorite={itemFavorite}
-                        searchValue={searchValue}
-                        setSearchValue={setSearchValue}
-                        setItemFavorite={setItemFavorite}
                         setItemCart={setItemCart}
                     />
-                />
-            </Routes>
-        </div>
+                )}
+                <Header setOpenCart={setOpenCart} />
+                <Routes>
+                    <Route path="/" element=<Home /> />
+                    <Route path="/Favorite" element=<Favorite /> />
+                </Routes>
+            </div>
+        </AppContext.Provider>
     );
 }
 

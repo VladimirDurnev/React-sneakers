@@ -1,51 +1,41 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import AppContext from '../context';
 import cl from '../style/App.module.css';
 import Search from '../UI/Search';
-import Card from '../components/Card';
-export default function Home({
-    sneakers,
-    itemCart,
-    itemFavorite,
-    loading,
-    searchValue,
-    setSearchValue,
-    setItemFavorite,
-    setItemCart,
-}) {
-    const renderItems = () => {
-        return (
-            loading
-                ? [...Array(4)]
-                : sneakers.filter((item) =>
-                      item.title
-                          .toLowerCase()
-                          .includes(searchValue.toLowerCase())
-                  )
-        ).map((item) => (
-            <Card
-                key={item?.id}
-                id={item?.id}
-                title={item?.title}
-                price={item?.price}
-                urlImg={item?.urlImg}
-                itemFavorite={itemFavorite}
-                setItemFavorite={setItemFavorite}
-                itemCart={itemCart}
-                setItemCart={setItemCart}
-                loading={loading}
-            />
-        ));
-    };
+import { renderItems } from '../helpers';
+
+export default function Home() {
+    const {
+        sneakers,
+        itemCart,
+        itemFavorite,
+        searchValue,
+        setSearchValue,
+        setItemFavorite,
+        setItemCart,
+        loading,
+    } = useContext(AppContext);
+
     return (
         <>
             <div className={cl.sneakers}>
-                <h1>Все кроссовки</h1>
+                <h1>Избранное</h1>
                 <Search
                     searchValue={searchValue}
                     setSearchValue={setSearchValue}
                 />
             </div>
-            <div className={cl.Allcard__wrapper}>{renderItems()}</div>
+            <div className={cl.Allcard__wrapper}>
+                {renderItems(
+                    sneakers,
+                    itemCart,
+                    itemFavorite,
+                    searchValue,
+                    setItemFavorite,
+                    setItemCart,
+                    loading
+                )}
+            </div>
         </>
     );
 }
