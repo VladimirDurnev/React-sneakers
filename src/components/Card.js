@@ -63,11 +63,12 @@ const Card = ({
             }).then(setFavoriteStatus(true))
         }else{
             axios.delete(`http://localhost:3000/favorite/${id}`);
+            setItemFavorite(prev => prev.filter(item => item.id !== id))
         }
     };
     return (
         <div>
-            <div className={cl.card}>
+            <div className={cl.card}>   
                 <span className={cl.favorite}>
                     <img
                         src={

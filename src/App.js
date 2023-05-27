@@ -3,9 +3,12 @@ import axios from 'axios';
 
 import cl from './style/App.module.css';
 import Header from './components/Header';
-import Search from './UI/Search';
 import Cart from './components/Cart';
-import Card from './components/Card';
+
+
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Favorite from './pages/Favorite';
 
 function App() {
     const [sneakers, setSneakers] = useState();
@@ -28,7 +31,6 @@ function App() {
             .then((res) => setItemFavorite(res.data));
     }, []);
 
-
     return (
         <div className={cl.wrapper}>
             {openCart && (
@@ -39,38 +41,34 @@ function App() {
                 />
             )}
             <Header setOpenCart={setOpenCart} />
-            <hr />
-            <section>
-                <div className={cl.sneakers}>
-                    <h1>Все кроссовки</h1>
-                    <Search
+            <Routes>
+                <Route
+                    path="/"
+                    element=<Home
+                        sneakers={sneakers}
+                        itemCart={itemCart}
+                        itemFavorite={itemFavorite}
+                        response={response}
                         searchValue={searchValue}
                         setSearchValue={setSearchValue}
+                        setItemFavorite={setItemFavorite}
+                        setItemCart={setItemCart}
                     />
-                </div>
-                <div className={cl.Allcard__wrapper}>
-                    {response &&
-                        sneakers
-                            .filter((item) =>
-                                item.title
-                                    .toLowerCase()
-                                    .includes(searchValue.toLowerCase())
-                            )
-                            .map((item) => (
-                                <Card
-                                    key={item.id}
-                                    id={item.id}
-                                    title={item.title}
-                                    price={item.price}
-                                    urlImg={item.urlImg}
-                                    itemFavorite={itemFavorite}
-                                    setItemFavorite={setItemFavorite}
-                                    itemCart={itemCart}
-                                    setItemCart={setItemCart}
-                                />
-                            ))}
-                </div>
-            </section>
+                />
+                <Route
+                    path="/Favorite"
+                    element=<Favorite
+                        itemCart={itemCart}
+                        itemFavorite={itemFavorite}
+                        response={response}
+                        searchValue={searchValue}
+                        setSearchValue={setSearchValue}
+                        setItemFavorite={setItemFavorite}
+                        setItemCart={setItemCart}
+                    
+                    />
+                />
+            </Routes>
         </div>
     );
 }
